@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="auth.css">
+    
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css?412">
+	<link rel="stylesheet" type="text/css" href="style.css?7376">
+	<link rel="stylesheet" type="text/css" href="./css/animate.min.css?7175">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,800,40&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Poppins:100,500,700,40&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  
+    <title>Авторизация</title>
+</head>
+
+<body >
+
+  <div class="bloc bgc-6691 d-bloc " id="navigation">
+	<div class="container bloc-sm">
+		<div class="row">
+			<div class="text-start col-lg-2 align-self-center mb-0 col-md-3 col-sm-4 col-10">
+				<a href="index.html" class="a-btn a-block ltc-6728 logo-style">Автозапчасти</a>
+			</div>
+			<div class="text-lg-center text-center col-lg-8 col-md-6 col-sm-4 col-2">
+				<nav class="navbar navbar-light row navbar-expand-md">
+					<div class="container-fluid flex-column">
+						<button id="nav-toggle" type="button" class="ui-navbar-toggler navbar-toggler border-0 p-0" data-bs-toggle="collapse" data-bs-target=".navbar-16713" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"><svg height="32" viewBox="0 0 32 32" width="32"><path class="svg-menu-icon  " d="m2 9h28m-28 7h28m-28 7h28"></path></svg></span>
+						</button>
+						<div class="collapse navbar-collapse navbar-16713 special-dropdown-nav">
+								<ul class="site-navigation nav navbar-nav mx-auto justify-content-center uppercase-text">
+									<li class="nav-item">
+										<a href="index.html" class="nav-link a-btn ltc-6728">Главная</a>
+									</li>
+									<li class="nav-item">
+										<a href="index.html" class="nav-link a-btn ltc-6728"></a>
+									</li>
+									<li class="nav-item">
+										<a href="contact.html" class="nav-link a-btn ltc-6728">Заказ</a>
+									</li>
+									<li class="nav-item">
+										<a href="onax.html" class="nav-link a-btn ltc-6728">О нас</a>
+									</li>
+									<li class="nav-item">
+										<a href="contact.html" class="nav-link a-btn ltc-6728"></a>
+									</li>
+									<li class="nav-item">
+										<a href="katal.html" class="a-btn nav-link ltc-6728">Каталог</a>
+									</li>
+								</ul>
+							</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+    <main>
+        <section>
+            <form id="auth-form" name="authForm" novalidate>
+                <label for="login">Имя: </label>
+                <span id="login-error" class="error-message"></span>
+                <input type="text" id="login" name="login" pattern="^[А-Яа-я0-9]{4,10}$" placeholder="Введите Имя"
+                    required>
+               
+
+                <label for="date">Дата рождения: </label>
+                <span id="date-error" class="error-message"></span>
+                <input type="date" id="date" name="date" min="1950-01-01" max="2024-12-07" required>
+
+                <label for="gender">Пол:</label>
+                <span>Мужской<input type="radio" id="male" name="gender" value="Мужской" required checked></span>
+                <span>Женский<input type="radio" id="female" name="gender" value="Женский" required></span>
+                <span id="gender-error" class="error-message"></span>
+
+                <button type="submit" id="login-button">Войти</button>
+            </form>
+        </section>
+        <br>
+        <br>
+       <form id="auth-form">
+ <label for="login">Фамилия: </label>
+                <span id="login-error" class="error-message"></span>
+                <input type="text" id="login" name="login" pattern="^[А-Яа-я0-9]{4,10}$" placeholder="Введите Фамилию"
+                    required>
+                  <label for="login">Адресс: </label>
+                <span id="login-error" class="error-message"></span>
+                <input type="text" id="login" name="login" pattern="^[А-Яа-я0-9]{4,10}$" placeholder="Введите Адресс"
+                    required>
+
+                     <label for="login">Автомобиль </label>
+                <span id="login-error" class="error-message"></span>
+                <input type="text" id="login" name="login" pattern="^[А-Яа-я0-9]{4,10}$" placeholder="Введите авто"
+                    required>
+</form>  
+    </main>
+
+    <footer>
+        <div class="socials-container">
+            <div class="contact-info">
+                <div class="social-links">
+                    
+                   
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+
+</html>
