@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на прием к доктору</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Форма записи на прием к доктору</h1>
+        
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="fullName" class="required">Ваше ФИО</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Иванов Иван Иванович">
+                <div id="fullNameError" class="error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthDate" class="required">Ваша дата рождения</label>
+                <input type="date" id="birthDate" name="birthDate">
+                <div id="birthDateError" class="error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber" class="required">Ваш номер телефона</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="79123456789">
+                <div id="phoneNumberError" class="error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="appointmentDate">Дата приема</label>
+                <input type="date" id="appointmentDate" name="appointmentDate">
+                <div id="appointmentDateError" class="error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="appointmentTime">Время приема</label>
+                <input type="time" id="appointmentTime" name="appointmentTime">
+                <div id="appointmentTimeError" class="error"></div>
+            </div>
+            
+            <button type="button" id="submitButton">Отправить заявку</button>
+        </form>
+    </div>
+    
+    <footer>
+        <p>Защищено ФСБ.</p>
+        <p>Телефон: +7 (999) 444-33-22</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
