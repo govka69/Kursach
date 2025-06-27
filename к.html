@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на прием к доктору</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        h1 {
+            margin-top: 0;
+            font-size: 22px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        
+        input.invalid {
+            border-color: red;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #1a252f;
+        }
+        
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 3px;
+            display: none;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Форма записи на прием к доктору</h1>
+        
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="fullName" class="required">ФИО</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Иванов Иван Иванович">
+                <div id="fullNameError" class="error">Введите ФИО нормально</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthDate" class="required">Дата рождения</label>
+                <input type="date" id="birthDate" name="birthDate">
+                <div id="birthDateError" class="error">Не позже 2006 года</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber" class="required">Номер телефона</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="79123456789">
+                <div id="phoneNumberError" class="error">Тут должно быть 11 цифр!</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="appointmentDate">Дата приема</label>
+                <input type="date" id="appointmentDate" name="appointmentDate">
+                <div id="appointmentDateError" class="error">Не раньше завтрашнего дня</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="appointmentTime">Время приема</label>
+                <input type="time" id="appointmentTime" name="appointmentTime">
+                <div id="appointmentTimeError" class="error"> с 8:00 до 22:00!</div>
+            </div>
+            
+            <button type="submit">Отправить заявку</button>
+        </form>
+    </div>
+    
+    <footer>
+        <p> Защищено ФСБ.</p>
+        <p>Телефон: +7 (999) 444-33-22</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Установка минимальной даты приема (завтра)
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = minDate;
+            
+            // Отключение стандартных сообщений об ошибках
+            document.getElementById('registrationForm').addEventListener('invalid', function(e) {
+                e.preventDefault();
+            }, true);
+            
+            // Валидация формы
+            document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+                
+                // Сброс предыдущих ошибок
+                document.querySelectorAll('.error').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.querySelectorAll('input').forEach(el => {
+                    el.classList.remove('invalid');
+                });
+                
+                // Проверка ФИО
+                const fullName = document.getElementById('fullName');
+                if (!fullName.value || !/^[А-Яа-яЁё\s]+$/.test(fullName.value)) {
+                    document.getElementById('fullNameError').style.display = 'block';
+                    fullName.classList.add('invalid');
+                    isValid = false;
+                }
+                
+                // Проверка даты рождения
+                const birthDate = document.getElementById('birthDate');
+                if (!birthDate.value) {
+                    document.getElementById('birthDateError').style.display = 'block';
+                    birthDate.classList.add('invalid');
+                    isValid = false;
+                } else {
+                    const birthYear = new Date(birthDate.value).getFullYear();
+                    if (birthYear > 2006) {
+                        document.getElementById('birthDateError').style.display = 'block';
+                        birthDate.classList.add('invalid');
+                        isValid = false;
+                    }
+                }
+                
+                // Проверка телефона
+                const phoneNumber = document.getElementById('phoneNumber');
+                if (!phoneNumber.value || !/^[0-9]{11}$/.test(phoneNumber.value)) {
+                    document.getElementById('phoneNumberError').style.display = 'block';
+                    phoneNumber.classList.add('invalid');
+                    isValid = false;
+                }
+                
+                // Проверка даты приема (если указана)
+                const appointmentDate = document.getElementById('appointmentDate');
+                if (appointmentDate.value && new Date(appointmentDate.value) < tomorrow) {
+                    document.getElementById('appointmentDateError').style.display = 'block';
+                    appointmentDate.classList.add('invalid');
+                    isValid = false;
+                }
+                
+                // Проверка времени приема (если указано)
+                const appointmentTime = document.getElementById('appointmentTime');
+                if (appointmentTime.value) {
+                    const [hours, minutes] = appointmentTime.value.split(':').map(Number);
+                    if (hours < 8 || hours > 22 || (hours === 22 && minutes > 0)) {
+                        document.getElementById('appointmentTimeError').style.display = 'block';
+                        appointmentTime.classList.add('invalid');
+                        isValid = false;
+                    }
+                }
+                
+                if (isValid) {
+                    alert('Ваша заявка принята!');
+                    // Здесь можно отправить форму
+                    // this.submit();
+                } else {
+                    // Прокрутка к первой ошибке
+                    const firstError = document.querySelector('.error[style="display: block;"]');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+            
+            // Очистка ошибок при вводе
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('invalid')) {
+                        this.classList.remove('invalid');
+                        const errorElement = document.getElementById(this.id + 'Error');
+                        if (errorElement) errorElement.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
